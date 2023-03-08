@@ -1,0 +1,20 @@
+query GetUniqueMatterBySlug ($slug: String!) {
+  matter(where: {slug: $slug}) {
+    id
+    title
+    slug
+    lessons {
+      title
+      slug
+      videoId
+      teacher {
+        id
+        name
+        bio
+        avatarURL {
+          url
+        }
+      }
+    }
+  }
+}

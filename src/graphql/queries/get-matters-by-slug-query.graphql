@@ -1,0 +1,10 @@
+query GetMattersBySlug ($slug: String!) {
+  subject(where: {slug: $slug}) {
+    id
+    matters {
+      id
+      slug
+      title
+    }
+  }
+}
