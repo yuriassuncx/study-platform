@@ -1531,6 +1531,7 @@ export type LessonCreateInput = {
   availableAt?: InputMaybe<Scalars['DateTime']>;
   challenge?: InputMaybe<ChallengeCreateOneInlineInput>;
   clevo87tw3xop01ueag3g7a2x?: InputMaybe<MatterCreateManyInlineInput>;
+  clf1p2b1a2zv201ug88a2aveo?: InputMaybe<SubscriberCreateManyInlineInput>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   description?: InputMaybe<Scalars['String']>;
   lessonMatter: LessonMatter;
@@ -1818,6 +1819,7 @@ export type LessonUpdateInput = {
   availableAt?: InputMaybe<Scalars['DateTime']>;
   challenge?: InputMaybe<ChallengeUpdateOneInlineInput>;
   clevo87tw3xop01ueag3g7a2x?: InputMaybe<MatterUpdateManyInlineInput>;
+  clf1p2b1a2zv201ug88a2aveo?: InputMaybe<SubscriberUpdateManyInlineInput>;
   description?: InputMaybe<Scalars['String']>;
   lessonMatter?: InputMaybe<LessonMatter>;
   lessonType?: InputMaybe<LessonType>;
@@ -2728,6 +2730,8 @@ export type Mutation = {
   createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Create one subject */
   createSubject?: Maybe<Subject>;
+  /** Create one subscriber */
+  createSubscriber?: Maybe<Subscriber>;
   /** Create one teacher */
   createTeacher?: Maybe<Teacher>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
@@ -2772,6 +2776,13 @@ export type Mutation = {
   /** Delete many Subject documents, return deleted documents */
   deleteManySubjectsConnection: SubjectConnection;
   /**
+   * Delete many Subscriber documents
+   * @deprecated Please use the new paginated many mutation (deleteManySubscribersConnection)
+   */
+  deleteManySubscribers: BatchPayload;
+  /** Delete many Subscriber documents, return deleted documents */
+  deleteManySubscribersConnection: SubscriberConnection;
+  /**
    * Delete many Teacher documents
    * @deprecated Please use the new paginated many mutation (deleteManyTeachersConnection)
    */
@@ -2786,6 +2797,8 @@ export type Mutation = {
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
   /** Delete one subject from _all_ existing stages. Returns deleted document. */
   deleteSubject?: Maybe<Subject>;
+  /** Delete one subscriber from _all_ existing stages. Returns deleted document. */
+  deleteSubscriber?: Maybe<Subscriber>;
   /** Delete one teacher from _all_ existing stages. Returns deleted document. */
   deleteTeacher?: Maybe<Teacher>;
   /** Publish one asset */
@@ -2830,6 +2843,13 @@ export type Mutation = {
   /** Publish many Subject documents */
   publishManySubjectsConnection: SubjectConnection;
   /**
+   * Publish many Subscriber documents
+   * @deprecated Please use the new paginated many mutation (publishManySubscribersConnection)
+   */
+  publishManySubscribers: BatchPayload;
+  /** Publish many Subscriber documents */
+  publishManySubscribersConnection: SubscriberConnection;
+  /**
    * Publish many Teacher documents
    * @deprecated Please use the new paginated many mutation (publishManyTeachersConnection)
    */
@@ -2840,6 +2860,8 @@ export type Mutation = {
   publishMatter?: Maybe<Matter>;
   /** Publish one subject */
   publishSubject?: Maybe<Subject>;
+  /** Publish one subscriber */
+  publishSubscriber?: Maybe<Subscriber>;
   /** Publish one teacher */
   publishTeacher?: Maybe<Teacher>;
   /** Schedule to publish one asset */
@@ -2852,6 +2874,8 @@ export type Mutation = {
   schedulePublishMatter?: Maybe<Matter>;
   /** Schedule to publish one subject */
   schedulePublishSubject?: Maybe<Subject>;
+  /** Schedule to publish one subscriber */
+  schedulePublishSubscriber?: Maybe<Subscriber>;
   /** Schedule to publish one teacher */
   schedulePublishTeacher?: Maybe<Teacher>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2864,6 +2888,8 @@ export type Mutation = {
   scheduleUnpublishMatter?: Maybe<Matter>;
   /** Unpublish one subject from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishSubject?: Maybe<Subject>;
+  /** Unpublish one subscriber from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishSubscriber?: Maybe<Subscriber>;
   /** Unpublish one teacher from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishTeacher?: Maybe<Teacher>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2908,6 +2934,13 @@ export type Mutation = {
   /** Find many Subject documents that match criteria in specified stage and unpublish from target stages */
   unpublishManySubjectsConnection: SubjectConnection;
   /**
+   * Unpublish many Subscriber documents
+   * @deprecated Please use the new paginated many mutation (unpublishManySubscribersConnection)
+   */
+  unpublishManySubscribers: BatchPayload;
+  /** Find many Subscriber documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManySubscribersConnection: SubscriberConnection;
+  /**
    * Unpublish many Teacher documents
    * @deprecated Please use the new paginated many mutation (unpublishManyTeachersConnection)
    */
@@ -2918,6 +2951,8 @@ export type Mutation = {
   unpublishMatter?: Maybe<Matter>;
   /** Unpublish one subject from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishSubject?: Maybe<Subject>;
+  /** Unpublish one subscriber from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishSubscriber?: Maybe<Subscriber>;
   /** Unpublish one teacher from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishTeacher?: Maybe<Teacher>;
   /** Update one asset */
@@ -2962,6 +2997,13 @@ export type Mutation = {
   /** Update many Subject documents */
   updateManySubjectsConnection: SubjectConnection;
   /**
+   * Update many subscribers
+   * @deprecated Please use the new paginated many mutation (updateManySubscribersConnection)
+   */
+  updateManySubscribers: BatchPayload;
+  /** Update many Subscriber documents */
+  updateManySubscribersConnection: SubscriberConnection;
+  /**
    * Update many teachers
    * @deprecated Please use the new paginated many mutation (updateManyTeachersConnection)
    */
@@ -2974,6 +3016,8 @@ export type Mutation = {
   updateScheduledRelease?: Maybe<ScheduledRelease>;
   /** Update one subject */
   updateSubject?: Maybe<Subject>;
+  /** Update one subscriber */
+  updateSubscriber?: Maybe<Subscriber>;
   /** Update one teacher */
   updateTeacher?: Maybe<Teacher>;
   /** Upsert one asset */
@@ -2986,6 +3030,8 @@ export type Mutation = {
   upsertMatter?: Maybe<Matter>;
   /** Upsert one subject */
   upsertSubject?: Maybe<Subject>;
+  /** Upsert one subscriber */
+  upsertSubscriber?: Maybe<Subscriber>;
   /** Upsert one teacher */
   upsertTeacher?: Maybe<Teacher>;
 };
@@ -3018,6 +3064,11 @@ export type MutationCreateScheduledReleaseArgs = {
 
 export type MutationCreateSubjectArgs = {
   data: SubjectCreateInput;
+};
+
+
+export type MutationCreateSubscriberArgs = {
+  data: SubscriberCreateInput;
 };
 
 
@@ -3116,6 +3167,21 @@ export type MutationDeleteManySubjectsConnectionArgs = {
 };
 
 
+export type MutationDeleteManySubscribersArgs = {
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationDeleteManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationDeleteManyTeachersArgs = {
   where?: InputMaybe<TeacherManyWhereInput>;
 };
@@ -3148,6 +3214,11 @@ export type MutationDeleteScheduledReleaseArgs = {
 
 export type MutationDeleteSubjectArgs = {
   where: SubjectWhereUniqueInput;
+};
+
+
+export type MutationDeleteSubscriberArgs = {
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -3273,6 +3344,24 @@ export type MutationPublishManySubjectsConnectionArgs = {
 };
 
 
+export type MutationPublishManySubscribersArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationPublishManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationPublishManyTeachersArgs = {
   to?: Array<Stage>;
   where?: InputMaybe<TeacherManyWhereInput>;
@@ -3300,6 +3389,12 @@ export type MutationPublishMatterArgs = {
 export type MutationPublishSubjectArgs = {
   to?: Array<Stage>;
   where: SubjectWhereUniqueInput;
+};
+
+
+export type MutationPublishSubscriberArgs = {
+  to?: Array<Stage>;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -3352,6 +3447,14 @@ export type MutationSchedulePublishSubjectArgs = {
 };
 
 
+export type MutationSchedulePublishSubscriberArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: SubscriberWhereUniqueInput;
+};
+
+
 export type MutationSchedulePublishTeacherArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
@@ -3399,6 +3502,14 @@ export type MutationScheduleUnpublishSubjectArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   where: SubjectWhereUniqueInput;
+};
+
+
+export type MutationScheduleUnpublishSubscriberArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -3524,6 +3635,24 @@ export type MutationUnpublishManySubjectsConnectionArgs = {
 };
 
 
+export type MutationUnpublishManySubscribersArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationUnpublishManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationUnpublishManyTeachersArgs = {
   from?: Array<Stage>;
   where?: InputMaybe<TeacherManyWhereInput>;
@@ -3551,6 +3680,12 @@ export type MutationUnpublishMatterArgs = {
 export type MutationUnpublishSubjectArgs = {
   from?: Array<Stage>;
   where: SubjectWhereUniqueInput;
+};
+
+
+export type MutationUnpublishSubscriberArgs = {
+  from?: Array<Stage>;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -3663,6 +3798,23 @@ export type MutationUpdateManySubjectsConnectionArgs = {
 };
 
 
+export type MutationUpdateManySubscribersArgs = {
+  data: SubscriberUpdateManyInput;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
+export type MutationUpdateManySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: SubscriberUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<SubscriberManyWhereInput>;
+};
+
+
 export type MutationUpdateManyTeachersArgs = {
   data: TeacherUpdateManyInput;
   where?: InputMaybe<TeacherManyWhereInput>;
@@ -3695,6 +3847,12 @@ export type MutationUpdateScheduledReleaseArgs = {
 export type MutationUpdateSubjectArgs = {
   data: SubjectUpdateInput;
   where: SubjectWhereUniqueInput;
+};
+
+
+export type MutationUpdateSubscriberArgs = {
+  data: SubscriberUpdateInput;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -3731,6 +3889,12 @@ export type MutationUpsertMatterArgs = {
 export type MutationUpsertSubjectArgs = {
   upsert: SubjectUpsertInput;
   where: SubjectWhereUniqueInput;
+};
+
+
+export type MutationUpsertSubscriberArgs = {
+  upsert: SubscriberUpsertInput;
+  where: SubscriberWhereUniqueInput;
 };
 
 
@@ -3825,6 +3989,14 @@ export type Query = {
   subjects: Array<Subject>;
   /** Retrieve multiple subjects using the Relay connection interface */
   subjectsConnection: SubjectConnection;
+  /** Retrieve a single subscriber */
+  subscriber?: Maybe<Subscriber>;
+  /** Retrieve document version */
+  subscriberVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple subscribers */
+  subscribers: Array<Subscriber>;
+  /** Retrieve multiple subscribers using the Relay connection interface */
+  subscribersConnection: SubscriberConnection;
   /** Retrieve a single teacher */
   teacher?: Maybe<Teacher>;
   /** Retrieve document version */
@@ -4105,6 +4277,44 @@ export type QuerySubjectsConnectionArgs = {
 };
 
 
+export type QuerySubscriberArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: SubscriberWhereUniqueInput;
+};
+
+
+export type QuerySubscriberVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QuerySubscribersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<SubscriberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<SubscriberWhereInput>;
+};
+
+
+export type QuerySubscribersConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<SubscriberOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<SubscriberWhereInput>;
+};
+
+
 export type QueryTeacherArgs = {
   locales?: Array<Locale>;
   stage?: Stage;
@@ -4287,7 +4497,7 @@ export type ScheduledOperationUpdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Challenge | Lesson | Matter | Subject | Teacher;
+export type ScheduledOperationAffectedDocument = Asset | Challenge | Lesson | Matter | Subject | Subscriber | Teacher;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -5726,6 +5936,590 @@ export type SubjectWhereUniqueInput = {
   title?: InputMaybe<Scalars['String']>;
 };
 
+export type Subscriber = Node & {
+  __typename?: 'Subscriber';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Subscriber>;
+  email: Scalars['String'];
+  /** List of Subscriber versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  lessons: Array<Lesson>;
+  name: Scalars['String'];
+  password: Scalars['String'];
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  slug: Scalars['String'];
+  /** System stage field */
+  stage: Stage;
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type SubscriberCreatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type SubscriberDocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type SubscriberHistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type SubscriberLessonsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  orderBy?: InputMaybe<LessonOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<LessonWhereInput>;
+};
+
+
+export type SubscriberPublishedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type SubscriberScheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type SubscriberUpdatedByArgs = {
+  forceParentLocale?: InputMaybe<Scalars['Boolean']>;
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type SubscriberConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: SubscriberWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type SubscriberConnection = {
+  __typename?: 'SubscriberConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<SubscriberEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type SubscriberCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  lessons?: InputMaybe<LessonCreateManyInlineInput>;
+  name: Scalars['String'];
+  password: Scalars['String'];
+  slug: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type SubscriberCreateManyInlineInput = {
+  /** Connect multiple existing Subscriber documents */
+  connect?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Create and connect multiple existing Subscriber documents */
+  create?: InputMaybe<Array<SubscriberCreateInput>>;
+};
+
+export type SubscriberCreateOneInlineInput = {
+  /** Connect one existing Subscriber document */
+  connect?: InputMaybe<SubscriberWhereUniqueInput>;
+  /** Create and connect one Subscriber document */
+  create?: InputMaybe<SubscriberCreateInput>;
+};
+
+/** An edge in a connection. */
+export type SubscriberEdge = {
+  __typename?: 'SubscriberEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Subscriber;
+};
+
+/** Identifies documents */
+export type SubscriberManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<SubscriberWhereStageInput>;
+  documentInStages_none?: InputMaybe<SubscriberWhereStageInput>;
+  documentInStages_some?: InputMaybe<SubscriberWhereStageInput>;
+  email?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  email_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  email_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  email_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  email_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  email_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  email_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  email_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  email_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  email_starts_with?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  lessons_every?: InputMaybe<LessonWhereInput>;
+  lessons_none?: InputMaybe<LessonWhereInput>;
+  lessons_some?: InputMaybe<LessonWhereInput>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  password_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  password_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  password_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  password_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  password_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  password_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  password_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  password_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  password_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  slug?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  slug_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  slug_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  slug_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  slug_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  slug_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export enum SubscriberOrderByInput {
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  EmailAsc = 'email_ASC',
+  EmailDesc = 'email_DESC',
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  PasswordAsc = 'password_ASC',
+  PasswordDesc = 'password_DESC',
+  PublishedAtAsc = 'publishedAt_ASC',
+  PublishedAtDesc = 'publishedAt_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC'
+}
+
+export type SubscriberUpdateInput = {
+  email?: InputMaybe<Scalars['String']>;
+  lessons?: InputMaybe<LessonUpdateManyInlineInput>;
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
+export type SubscriberUpdateManyInlineInput = {
+  /** Connect multiple existing Subscriber documents */
+  connect?: InputMaybe<Array<SubscriberConnectInput>>;
+  /** Create and connect multiple Subscriber documents */
+  create?: InputMaybe<Array<SubscriberCreateInput>>;
+  /** Delete multiple Subscriber documents */
+  delete?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Disconnect multiple Subscriber documents */
+  disconnect?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Subscriber documents */
+  set?: InputMaybe<Array<SubscriberWhereUniqueInput>>;
+  /** Update multiple Subscriber documents */
+  update?: InputMaybe<Array<SubscriberUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Subscriber documents */
+  upsert?: InputMaybe<Array<SubscriberUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type SubscriberUpdateManyInput = {
+  name?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+};
+
+export type SubscriberUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: SubscriberUpdateManyInput;
+  /** Document search */
+  where: SubscriberWhereInput;
+};
+
+export type SubscriberUpdateOneInlineInput = {
+  /** Connect existing Subscriber document */
+  connect?: InputMaybe<SubscriberWhereUniqueInput>;
+  /** Create and connect one Subscriber document */
+  create?: InputMaybe<SubscriberCreateInput>;
+  /** Delete currently connected Subscriber document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Subscriber document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Subscriber document */
+  update?: InputMaybe<SubscriberUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Subscriber document */
+  upsert?: InputMaybe<SubscriberUpsertWithNestedWhereUniqueInput>;
+};
+
+export type SubscriberUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: SubscriberUpdateInput;
+  /** Unique document search */
+  where: SubscriberWhereUniqueInput;
+};
+
+export type SubscriberUpsertInput = {
+  /** Create document if it didn't exist */
+  create: SubscriberCreateInput;
+  /** Update document if it exists */
+  update: SubscriberUpdateInput;
+};
+
+export type SubscriberUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: SubscriberUpsertInput;
+  /** Unique document search */
+  where: SubscriberWhereUniqueInput;
+};
+
+/** This contains a set of filters that can be used to compare values internally */
+export type SubscriberWhereComparatorInput = {
+  /** This field can be used to request to check if the entry is outdated by internal comparison */
+  outdated_to?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Identifies documents */
+export type SubscriberWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SubscriberWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  documentInStages_every?: InputMaybe<SubscriberWhereStageInput>;
+  documentInStages_none?: InputMaybe<SubscriberWhereStageInput>;
+  documentInStages_some?: InputMaybe<SubscriberWhereStageInput>;
+  email?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  email_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  email_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  email_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  email_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  email_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  email_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  email_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  email_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  email_starts_with?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  lessons_every?: InputMaybe<LessonWhereInput>;
+  lessons_none?: InputMaybe<LessonWhereInput>;
+  lessons_some?: InputMaybe<LessonWhereInput>;
+  name?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  name_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  name_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  name_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  name_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  name_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  name_starts_with?: InputMaybe<Scalars['String']>;
+  password?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  password_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  password_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  password_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  password_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  password_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  password_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  password_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  password_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  password_starts_with?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  slug?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  slug_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  slug_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  slug_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  slug_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  slug_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  slug_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** The document in stages filter allows specifying a stage entry to cross compare the same document between different stages */
+export type SubscriberWhereStageInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<SubscriberWhereStageInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<SubscriberWhereStageInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<SubscriberWhereStageInput>>;
+  /** This field contains fields which can be set as true or false to specify an internal comparison */
+  compareWithParent?: InputMaybe<SubscriberWhereComparatorInput>;
+  /** Specify the stage to compare with */
+  stage?: InputMaybe<Stage>;
+};
+
+/** References Subscriber record uniquely */
+export type SubscriberWhereUniqueInput = {
+  email?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+  slug?: InputMaybe<Scalars['String']>;
+};
+
 export enum SystemDateTimeFieldVariation {
   Base = 'BASE',
   Combined = 'COMBINED',
@@ -6751,6 +7545,13 @@ export type GetMattersBySlugQueryVariables = Exact<{
 
 export type GetMattersBySlugQuery = { __typename?: 'Query', subject?: { __typename?: 'Subject', id: string, matters: Array<{ __typename?: 'Matter', id: string, slug: string, title: string }> } | null };
 
+export type GetSubscriberByEmailQueryVariables = Exact<{
+  email: Scalars['String'];
+}>;
+
+
+export type GetSubscriberByEmailQuery = { __typename?: 'Query', subscriber?: { __typename?: 'Subscriber', id: string, slug: string, name: string, password: string, email: string, lessons: Array<{ __typename?: 'Lesson', id: string, title: string }> } | null };
+
 export type GetUniqueMatterBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -6881,6 +7682,49 @@ export function useGetMattersBySlugLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetMattersBySlugQueryHookResult = ReturnType<typeof useGetMattersBySlugQuery>;
 export type GetMattersBySlugLazyQueryHookResult = ReturnType<typeof useGetMattersBySlugLazyQuery>;
 export type GetMattersBySlugQueryResult = Apollo.QueryResult<GetMattersBySlugQuery, GetMattersBySlugQueryVariables>;
+export const GetSubscriberByEmailDocument = gql`
+    query GetSubscriberByEmail($email: String!) {
+  subscriber(where: {email: $email}) {
+    id
+    slug
+    name
+    password
+    email
+    lessons {
+      id
+      title
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetSubscriberByEmailQuery__
+ *
+ * To run a query within a React component, call `useGetSubscriberByEmailQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetSubscriberByEmailQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetSubscriberByEmailQuery({
+ *   variables: {
+ *      email: // value for 'email'
+ *   },
+ * });
+ */
+export function useGetSubscriberByEmailQuery(baseOptions: Apollo.QueryHookOptions<GetSubscriberByEmailQuery, GetSubscriberByEmailQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetSubscriberByEmailQuery, GetSubscriberByEmailQueryVariables>(GetSubscriberByEmailDocument, options);
+      }
+export function useGetSubscriberByEmailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetSubscriberByEmailQuery, GetSubscriberByEmailQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetSubscriberByEmailQuery, GetSubscriberByEmailQueryVariables>(GetSubscriberByEmailDocument, options);
+        }
+export type GetSubscriberByEmailQueryHookResult = ReturnType<typeof useGetSubscriberByEmailQuery>;
+export type GetSubscriberByEmailLazyQueryHookResult = ReturnType<typeof useGetSubscriberByEmailLazyQuery>;
+export type GetSubscriberByEmailQueryResult = Apollo.QueryResult<GetSubscriberByEmailQuery, GetSubscriberByEmailQueryVariables>;
 export const GetUniqueMatterBySlugDocument = gql`
     query GetUniqueMatterBySlug($slug: String!) {
   matter(where: {slug: $slug}) {

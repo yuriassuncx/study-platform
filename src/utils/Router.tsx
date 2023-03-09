@@ -11,12 +11,12 @@ import { Lessons } from '../pages/sub/Lessons';
 export function Router() {
   return (
     <Routes>
-      <Route path='/*' element={<Home />} />
       <Route path='/login' element={<Login />} />
-      <Route path="/lessons" element={<Lessons />} />
-      <Route path="/lessons/:slug" element={<Lessons />} />
       <Route element={<PrivateRoute />}>
-        <Route path='/login' element={<Admin />} />
+        <Route path='/admin' element={<Admin />} />
+        <Route path='/*' element={<Home />} />
+        <Route path="/lessons" element={<Lessons />} />
+        <Route path="/lessons/:slug" element={<Lessons />} />
       </Route>
     </Routes>
   )

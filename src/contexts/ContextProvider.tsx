@@ -1,10 +1,11 @@
 import { createContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 
+import { GetSubscriberByEmailQuery } from '../graphql/generated';
+
 type User = {
   name?: string;
   email?: string;
-  photoUrl?: string;
 }
 
 type AppContextType = {
@@ -12,7 +13,7 @@ type AppContextType = {
   setUser: React.Dispatch<React.SetStateAction<User | null>>;
   isActiveMenu: boolean;
   setIsActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
-  signIn: (data?: any | undefined, password?: string) => void;
+  signIn: (data?: GetSubscriberByEmailQuery | undefined, password?: string) => void;
   logout: () => void;
 }
 
@@ -31,7 +32,7 @@ export function AppProvider({ children }: ChildrenProps) {
 
   const [isActiveMenu, setIsActiveMenu] = useState(false);
 
-  async function signIn(data?: any | undefined, password?: string) {
+  async function signIn(data?: GetSubscriberByEmailQuery | undefined, password?: string) {
     const isUserValid = !!data;
 
     if (!isUserValid) {
@@ -40,19 +41,17 @@ export function AppProvider({ children }: ChildrenProps) {
       return;
     }
 
-    if (password === data.admin?.password) {
+    if (password === data.subscriber?.password) {
       localStorage.setItem("user", JSON.stringify({
-        id: data.admin.id,
-        name: data.admin.name,
-        email: data.admin.email,
+        id: data?.subscriber?.id,
+        name: data?.subscriber?.name,
+        email: data?.subscriber?.email,
         password: undefined,
-        photoUrl: data.admin.photoUrl
       }));
 
       setUser({
-        name: data.admin?.name,
-        email: data.admin?.email,
-        photoUrl: data.admin?.photoUrl?.url,
+        name: data.subscriber?.name,
+        email: data.subscriber?.email,
       });
 
       toast.success("Logado com sucesso!", {
