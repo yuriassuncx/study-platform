@@ -7,6 +7,8 @@ import { ProfileModal } from './ProfileModal';
 export function ProfileSection() {
   const { user } = useApplication();
 
+  console.log(user?.languageType)
+
   return (
     <section className="flex flex-col w-full gap-1 pt-24">
       <div className="flex items-center justify-between bg-violet-500 rounded-lg h-[140px] p-4 shadow-lg shadow-violet-500">
@@ -36,7 +38,7 @@ export function ProfileSection() {
           
           <div className="hidden sm:flex items-center gap-2">
             <span className="text-emerald-300">Língua Estrangeira:</span>
-            <p>Inglês</p>
+            <p>{user?.languageType}</p>
           </div>
         </div>
       </div>

@@ -31,6 +31,8 @@ export function AppProvider({ children }: ChildrenProps) {
       : null
   );
 
+  console.log(user)
+
   const [isActiveMenu, setIsActiveMenu] = useState(false);
 
   async function signIn(data?: GetSubscriberByEmailQuery | undefined, password?: string) {

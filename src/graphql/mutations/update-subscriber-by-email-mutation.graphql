@@ -1,4 +1,4 @@
-mutation UpdateSubscriberByEmail ($name: String!, $email: String!, $language: String!) {
+mutation UpdateSubscriberByEmail ($name: String, $email: String!, $language: String!) {
   updateSubscriber(
     data: {name: $name, languageType: $language}
     where: {email: $email}

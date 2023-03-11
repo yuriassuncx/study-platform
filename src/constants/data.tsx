@@ -39,10 +39,8 @@ export const subjectsData = [
 export const languages = [
   {
     title: 'Inglês',
-    type: 'english',
   },
   {
     title: 'Espanhol',
-    type: 'spanish',
   }
 ]

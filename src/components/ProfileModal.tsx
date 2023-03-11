@@ -12,25 +12,15 @@ import { toast } from 'react-hot-toast';
 export function ProfileModal() {
   const { user } = useApplication();
 
-  const [name, setName] = useState("");
-  const [language, setLanguage] = useState(languages[0].type);
+  const [language, setLanguage] = useState(languages[0].title);
 
   const [updateSubscriber, { loading }] = useUpdateSubscriberByEmailMutation();
 
   async function handleUpdateSubscriber() {
-    if (!name || !language) {
-      toast.error("Você deve preencher os campos de nome e língua estrangeira!", {
-        position: 'bottom-center',
-      });
-
-      return;
-    }
-
     await updateSubscriber({
       variables: {
         email: user?.email!,
         language: language,
-        name
       }
     })
 
@@ -56,9 +46,8 @@ export function ProfileModal() {
               name="name"
               id="name"
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder={user?.name}
+              value={user?.name}
+              readOnly={true}
               className="bg-white py-3 px-4 rounded text-sm text-black placeholder:text-zinc-500"
             />
           </div>
@@ -75,7 +64,7 @@ export function ProfileModal() {
               <option disabled>Selecione a sua linguagem</option>
 
               {languages.map((item) => {
-                return <option key={item.title} value={item.type}>{item.title}</option>
+                return <option key={item.title} value={item.title}>{item.title}</option>
               })}
             </select>
           </div>
@@ -90,7 +79,7 @@ export function ProfileModal() {
 
             <button
               onClick={handleUpdateSubscriber}
-              disabled={name.length < 5 && !language || loading}
+              disabled={!language || loading}
               className="bg-emerald-400 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-emerald-500 transition-colors duration-150 disabled:cursor-not-allowed disabled:opacity-75"
             >
               {loading ? (

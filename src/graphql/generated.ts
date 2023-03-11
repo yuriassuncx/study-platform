@@ -7571,7 +7571,7 @@ export enum _SystemDateTimeFieldVariation {
 }
 
 export type UpdateSubscriberByEmailMutationVariables = Exact<{
-  name: Scalars['String'];
+  name?: InputMaybe<Scalars['String']>;
   email: Scalars['String'];
   language: Scalars['String'];
 }>;
@@ -7614,7 +7614,7 @@ export type GetUniqueMatterBySlugQuery = { __typename?: 'Query', matter?: { __ty
 
 
 export const UpdateSubscriberByEmailDocument = gql`
-    mutation UpdateSubscriberByEmail($name: String!, $email: String!, $language: String!) {
+    mutation UpdateSubscriberByEmail($name: String, $email: String!, $language: String!) {
   updateSubscriber(
     data: {name: $name, languageType: $language}
     where: {email: $email}
