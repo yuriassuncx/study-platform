@@ -5949,6 +5949,7 @@ export type Subscriber = Node & {
   history: Array<Version>;
   /** The unique identifier */
   id: Scalars['ID'];
+  languageType?: Maybe<Scalars['String']>;
   lessons: Array<Lesson>;
   name: Scalars['String'];
   password: Scalars['String'];
@@ -6043,6 +6044,7 @@ export type SubscriberConnection = {
 export type SubscriberCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email: Scalars['String'];
+  languageType?: InputMaybe<Scalars['String']>;
   lessons?: InputMaybe<LessonCreateManyInlineInput>;
   name: Scalars['String'];
   password: Scalars['String'];
@@ -6140,6 +6142,25 @@ export type SubscriberManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  languageType?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  languageType_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  languageType_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  languageType_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  languageType_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  languageType_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  languageType_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  languageType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  languageType_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  languageType_starts_with?: InputMaybe<Scalars['String']>;
   lessons_every?: InputMaybe<LessonWhereInput>;
   lessons_none?: InputMaybe<LessonWhereInput>;
   lessons_some?: InputMaybe<LessonWhereInput>;
@@ -6244,6 +6265,8 @@ export enum SubscriberOrderByInput {
   EmailDesc = 'email_DESC',
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  LanguageTypeAsc = 'languageType_ASC',
+  LanguageTypeDesc = 'languageType_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   PasswordAsc = 'password_ASC',
@@ -6258,6 +6281,7 @@ export enum SubscriberOrderByInput {
 
 export type SubscriberUpdateInput = {
   email?: InputMaybe<Scalars['String']>;
+  languageType?: InputMaybe<Scalars['String']>;
   lessons?: InputMaybe<LessonUpdateManyInlineInput>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
@@ -6282,6 +6306,7 @@ export type SubscriberUpdateManyInlineInput = {
 };
 
 export type SubscriberUpdateManyInput = {
+  languageType?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
 };
@@ -6402,6 +6427,25 @@ export type SubscriberWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
+  languageType?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  languageType_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  languageType_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  languageType_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values that are not equal to given value. */
+  languageType_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  languageType_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  languageType_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  languageType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  /** All values not starting with the given string. */
+  languageType_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  languageType_starts_with?: InputMaybe<Scalars['String']>;
   lessons_every?: InputMaybe<LessonWhereInput>;
   lessons_none?: InputMaybe<LessonWhereInput>;
   lessons_some?: InputMaybe<LessonWhereInput>;
@@ -7526,6 +7570,15 @@ export enum _SystemDateTimeFieldVariation {
   Localization = 'localization'
 }
 
+export type UpdateSubscriberByEmailMutationVariables = Exact<{
+  name: Scalars['String'];
+  email: Scalars['String'];
+  language: Scalars['String'];
+}>;
+
+
+export type UpdateSubscriberByEmailMutation = { __typename?: 'Mutation', updateSubscriber?: { __typename?: 'Subscriber', id: string } | null };
+
 export type GetLessonBySlugQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
 }>;
@@ -7550,7 +7603,7 @@ export type GetSubscriberByEmailQueryVariables = Exact<{
 }>;
 
 
-export type GetSubscriberByEmailQuery = { __typename?: 'Query', subscriber?: { __typename?: 'Subscriber', id: string, slug: string, name: string, password: string, email: string, lessons: Array<{ __typename?: 'Lesson', id: string, title: string }> } | null };
+export type GetSubscriberByEmailQuery = { __typename?: 'Query', subscriber?: { __typename?: 'Subscriber', id: string, slug: string, name: string, password: string, email: string, languageType?: string | null, lessons: Array<{ __typename?: 'Lesson', id: string, title: string }> } | null };
 
 export type GetUniqueMatterBySlugQueryVariables = Exact<{
   slug: Scalars['String'];
@@ -7560,6 +7613,44 @@ export type GetUniqueMatterBySlugQueryVariables = Exact<{
 export type GetUniqueMatterBySlugQuery = { __typename?: 'Query', matter?: { __typename?: 'Matter', id: string, title: string, slug: string, lessons: Array<{ __typename?: 'Lesson', title: string, slug?: string | null, videoId: string, teacher?: { __typename?: 'Teacher', id: string, name: string, bio: string, avatarURL: { __typename?: 'Asset', url: string } } | null }> } | null };
 
 
+export const UpdateSubscriberByEmailDocument = gql`
+    mutation UpdateSubscriberByEmail($name: String!, $email: String!, $language: String!) {
+  updateSubscriber(
+    data: {name: $name, languageType: $language}
+    where: {email: $email}
+  ) {
+    id
+  }
+}
+    `;
+export type UpdateSubscriberByEmailMutationFn = Apollo.MutationFunction<UpdateSubscriberByEmailMutation, UpdateSubscriberByEmailMutationVariables>;
+
+/**
+ * __useUpdateSubscriberByEmailMutation__
+ *
+ * To run a mutation, you first call `useUpdateSubscriberByEmailMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateSubscriberByEmailMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateSubscriberByEmailMutation, { data, loading, error }] = useUpdateSubscriberByEmailMutation({
+ *   variables: {
+ *      name: // value for 'name'
+ *      email: // value for 'email'
+ *      language: // value for 'language'
+ *   },
+ * });
+ */
+export function useUpdateSubscriberByEmailMutation(baseOptions?: Apollo.MutationHookOptions<UpdateSubscriberByEmailMutation, UpdateSubscriberByEmailMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateSubscriberByEmailMutation, UpdateSubscriberByEmailMutationVariables>(UpdateSubscriberByEmailDocument, options);
+      }
+export type UpdateSubscriberByEmailMutationHookResult = ReturnType<typeof useUpdateSubscriberByEmailMutation>;
+export type UpdateSubscriberByEmailMutationResult = Apollo.MutationResult<UpdateSubscriberByEmailMutation>;
+export type UpdateSubscriberByEmailMutationOptions = Apollo.BaseMutationOptions<UpdateSubscriberByEmailMutation, UpdateSubscriberByEmailMutationVariables>;
 export const GetLessonBySlugDocument = gql`
     query GetLessonBySlug($slug: String) {
   lesson(where: {slug: $slug}) {
@@ -7690,6 +7781,7 @@ export const GetSubscriberByEmailDocument = gql`
     name
     password
     email
+    languageType
     lessons {
       id
       title

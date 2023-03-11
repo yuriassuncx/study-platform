@@ -6,6 +6,7 @@ import { GetSubscriberByEmailQuery } from '../graphql/generated';
 type User = {
   name?: string;
   email?: string;
+  languageType?: string | null;
 }
 
 type AppContextType = {
@@ -46,12 +47,14 @@ export function AppProvider({ children }: ChildrenProps) {
         id: data?.subscriber?.id,
         name: data?.subscriber?.name,
         email: data?.subscriber?.email,
+        languageType: data.subscriber?.languageType,
         password: undefined,
       }));
 
       setUser({
         name: data.subscriber?.name,
         email: data.subscriber?.email,
+        languageType: data.subscriber?.languageType,
       });
 
       toast.success("Logado com sucesso!", {

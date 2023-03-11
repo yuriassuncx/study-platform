@@ -1,5 +1,8 @@
-import { NotePencil } from "phosphor-react";
-import { useApplication } from "../hooks/useApplication";
+import { NotePencil } from 'phosphor-react';
+import { useApplication } from '../hooks/useApplication';
+
+import * as Dialog from '@radix-ui/react-dialog';
+import { ProfileModal } from './ProfileModal';
 
 export function ProfileSection() {
   const { user } = useApplication();
@@ -13,12 +16,18 @@ export function ProfileSection() {
         </div>
 
         <div className="flex flex-col items-end gap-1 text-white font-bold">
-          <NotePencil
-            size={20}
-            color="#47f0ce"
-            weight="bold"
-            className="absolute -translate-y-[175%] sm:-translate-y-3/4 cursor-pointer hover:opacity-80"
-          />
+          <Dialog.Root>
+            <Dialog.Trigger className="absolute -translate-y-[175%] sm:-translate-y-3/4 cursor-pointer">
+              <NotePencil
+                size={20}
+                color="#47f0ce"
+                weight="bold"
+                className="hover:opacity-80"
+                />
+              </Dialog.Trigger>
+
+              <ProfileModal />
+          </Dialog.Root>
           
           <div className="hidden sm:flex items-center gap-2 pt-4">
             <span className="text-yellow-300">Email:</span>

@@ -35,3 +35,14 @@ export const subjectsData = [
     image: 'undraw_writer_q06d.png'
   }
 ]
+
+export const languages = [
+  {
+    title: 'Inglês',
+    type: 'english',
+  },
+  {
+    title: 'Espanhol',
+    type: 'spanish',
+  }
+]

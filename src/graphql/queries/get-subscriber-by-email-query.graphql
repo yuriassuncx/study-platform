@@ -5,6 +5,7 @@ query GetSubscriberByEmail ($email: String!) {
     name
     password
     email
+    languageType
     lessons {
       id
       title
